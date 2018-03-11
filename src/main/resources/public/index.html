@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+	function getMessage() {
+		var http = new XMLHttpRequest();
+		http.onreadystatechange = function() {
+			if(http.readyState == 4 && http.status == 200) {
+				var result = http.responseText;
+				var object = JSON.parse(result);
+				top.message.innerHTML = result;
+				top.objName.innerHTML = "姓名：" + object.name;
+				top.objAge.innerHTML = "年龄：" + object.age;
+			}
+		}
+		http.open("GET", "/getMessage.do", true);
+		http.send();
+	}
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+<button onclick="getMessage()">测试点击</button>
+<div id="message"></div>
+<div id="objName"></div>
+<div id="objAge"></div>
+</body>
+</html>
